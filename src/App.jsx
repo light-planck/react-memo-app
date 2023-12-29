@@ -1,8 +1,11 @@
-import "./App.css";
 import React from "react";
+
+import "./App.css";
+
 import { List } from "./components/List";
 import { Edit } from "./components/Edit";
 import { useViewMode } from "./hooks/useViewMode";
+import { useLocalStorage } from "./hooks/userLocalStorage";
 
 function App() {
   const { viewMode, viewHeader, toggleViewMode } = useViewMode({
@@ -10,16 +13,16 @@ function App() {
     headers: ["一覧", "編集"],
   });
 
+  const { storedValue: memos, setValue } = useLocalStorage("memos", []);
+
   return (
     <div className="container">
       <h1>{viewHeader}</h1>
       <div className="app">
         <List
-          items={[
-            { title: "memo1", content: "memo1\nhello\n" },
-            { title: "memo2", content: "memo2\nworld\n" },
-          ]}
+          items={memos}
           toggleViewMode={toggleViewMode}
+          setValue={setValue}
         />
         {viewMode === "edit" && <Edit />}
       </div>
