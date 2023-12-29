@@ -1,0 +1,17 @@
+.container {
+  margin: 0 auto 0 auto;
+  width: 1000px;
+  border: 1px solid #ccc;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  min-height: 500px;
+}
+
+.list {
+  width: 20%;
+  border: 1px solid #ccc;
+}
