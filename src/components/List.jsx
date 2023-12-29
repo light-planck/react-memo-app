@@ -2,11 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const List = ({ items, toggleViewMode, setValue }) => {
-  const handleClick = (e) => {
-    setValue((prev) => [
-      ...prev,
-      { title: "新規メモ", content: e.target.value },
-    ]);
+  const handleAddMemo = () => {
+    setValue((prev) => [...prev, { title: "新規メモ", content: "新規メモ" }]);
     toggleViewMode();
   };
 
@@ -15,7 +12,7 @@ export const List = ({ items, toggleViewMode, setValue }) => {
       {items.map((item, i) => (
         <div key={i}>{item.title}</div>
       ))}
-      <button onClick={handleClick}>+</button>
+      <button onClick={handleAddMemo}>+</button>
     </div>
   );
 };
