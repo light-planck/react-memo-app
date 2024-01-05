@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export const List = ({ items, toggleViewMode, setValue }) => {
-  const handleAddMemo = () => {
-    setValue((prev) => [...prev, { title: "新規メモ", content: "新規メモ" }]);
+export const List = ({ setSelectedId, toggleViewMode }) => {
+  const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
+
+  const handleAddItem = () => {
+    const newMemo = "新規メモ";
+    const newStoredValue = [
+      ...storedValue,
+      { title: newMemo, content: newMemo },
+    ];
+    setLocalStorageValue(newStoredValue);
+    setSelectedId(newStoredValue.length - 1);
     toggleViewMode();
   };
 
+  const handleViewItem = useCallback((i) => {
+    setSelectedId(i);
+    toggleViewMode();
+  }, []);
+
   return (
     <div className="list">
-      {items.map((item, i) => (
-        <div key={i}>{item.title}</div>
+      {storedValue.map((item, i) => (
+        <div key={i} onClick={() => handleViewItem(i)}>
+          {item.title}
+        </div>
       ))}
-      <button onClick={handleAddMemo}>+</button>
+      <button onClick={handleAddItem}>+</button>
     </div>
   );
 };
 
 List.propTypes = {
-  items: PropTypes.array.isRequired,
+  setSelectedId: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
-  setValue: PropTypes.func.isRequired,
 };
