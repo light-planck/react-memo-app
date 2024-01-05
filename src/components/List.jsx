@@ -39,7 +39,7 @@ List.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   setLocalStorageValue: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,

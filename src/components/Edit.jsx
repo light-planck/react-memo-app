@@ -52,7 +52,7 @@ Edit.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   selectedId: PropTypes.number,
   setLocalStorageValue: PropTypes.func.isRequired,
