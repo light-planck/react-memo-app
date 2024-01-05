@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export const Edit = ({ selectedId, setSelectedId, toggleViewMode }) => {
-  const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
-  const [text, setText] = useState(
-    selectedId ? storedValue[selectedId].content : ""
-  );
+export const Edit = ({
+  items,
+  selectedId,
+  setLocalStorageValue,
+  setSelectedId,
+  toggleViewMode,
+}) => {
+  const [text, setText] = useState(selectedId ? items[selectedId].content : "");
 
   const handleEdit = () => {
-    const newItems = [...storedValue];
+    const newItems = [...items];
     newItems[selectedId] = {
       title: text.split("\n")[0],
       content: text,
@@ -19,7 +21,7 @@ export const Edit = ({ selectedId, setSelectedId, toggleViewMode }) => {
   };
 
   const handleDelete = () => {
-    const newItems = [...storedValue];
+    const newItems = [...items];
     newItems.splice(selectedId, 1);
     setLocalStorageValue(newItems);
     setSelectedId(null);
@@ -46,7 +48,14 @@ export const Edit = ({ selectedId, setSelectedId, toggleViewMode }) => {
 };
 
 Edit.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   selectedId: PropTypes.number,
+  setLocalStorageValue: PropTypes.func.isRequired,
   setSelectedId: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
 };
