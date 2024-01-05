@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
-export const useViewMode = ({ modes, headers }) => {
-  const [viewMode, setViewMode] = useState(modes[0]);
-  const isDefault = viewMode === modes[0];
-  const viewHeader = isDefault ? headers[0] : headers[1];
-  const toggleViewMode = () => {
-    setViewMode(isDefault ? modes[1] : modes[0]);
-  };
+export const useViewMode = () => {
+  const [viewMode, setViewMode] = useState("list");
+  const viewHeader = viewMode === "list" ? "一覧" : "編集";
+  const toggleViewMode = useCallback(() => {
+    setViewMode((viewMode) => (viewMode === "list" ? "edit" : "list"));
+  }, []);
 
   return {
     viewMode,
