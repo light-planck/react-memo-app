@@ -34,10 +34,10 @@ export const Edit = ({ selectedId, setSelectedId, toggleViewMode }) => {
         onChange={(e) => setText(e.target.value)}
       />
       <div className="button-container">
-        <button className="large-button" onClick={() => handleEdit()}>
+        <button className="button-large" onClick={() => handleEdit()}>
           編集
         </button>
-        <button className="small-button" onClick={() => handleDelete()}>
+        <button className="button-small" onClick={() => handleDelete()}>
           削除
         </button>
       </div>

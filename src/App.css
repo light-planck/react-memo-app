@@ -39,14 +39,21 @@
   height: 2rem;
 }
 
-.large-button {
+.button-large {
   width: 80%;
   border-radius: 0.5rem;
   font-size: 1.2rem;
 }
 
-.small-button {
+.button-small {
   width: 20%;
   border-radius: 0.5rem;
   font-size: 1.2rem;
+}
+
+.button-add {
+  color: blue;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
 }

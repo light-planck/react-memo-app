@@ -30,7 +30,9 @@ export const List = ({ viewMode, toggleViewMode, setSelectedId }) => {
           {item.title}
         </div>
       ))}
-      <button onClick={() => handleAddItem()}>+</button>
+      <button className="button-add" onClick={() => handleAddItem()}>
+        +
+      </button>
     </div>
   );
 };
