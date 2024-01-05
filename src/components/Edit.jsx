@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export const Edit = ({
@@ -8,7 +8,10 @@ export const Edit = ({
   setSelectedId,
   toggleViewMode,
 }) => {
-  const [text, setText] = useState(selectedId ? items[selectedId].content : "");
+  const [text, setText] = useState(items[selectedId].content);
+  useEffect(() => {
+    setText(items[selectedId].content);
+  }, [selectedId]);
 
   const handleEdit = () => {
     const newItems = [...items];
@@ -52,7 +55,7 @@ Edit.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   selectedId: PropTypes.number,
   setLocalStorageValue: PropTypes.func.isRequired,

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 export const List = ({
   items,
+  viewMode,
   setLocalStorageValue,
   toggleViewMode,
   setSelectedId,
@@ -12,12 +13,12 @@ export const List = ({
     const newStoredValue = [...items, { title: newMemo, content: newMemo }];
     setLocalStorageValue(newStoredValue);
     setSelectedId(newStoredValue.length - 1);
-    toggleViewMode();
+    if (viewMode === "list") toggleViewMode();
   };
 
   const handleViewItem = (i) => {
     setSelectedId(i);
-    toggleViewMode();
+    if (viewMode === "list") toggleViewMode();
   };
 
   return (
@@ -39,8 +40,9 @@ List.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
+  viewMode: PropTypes.string.isRequired,
   setLocalStorageValue: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
   setSelectedId: PropTypes.func.isRequired,

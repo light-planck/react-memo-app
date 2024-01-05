@@ -18,6 +18,7 @@ function App() {
       <div className="app">
         <List
           items={storedValue}
+          viewMode={viewMode}
           setLocalStorageValue={setLocalStorageValue}
           toggleViewMode={toggleViewMode}
           setSelectedId={setSelectedId}
