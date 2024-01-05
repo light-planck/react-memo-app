@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export const List = ({ viewMode, toggleViewMode, setSelectedId }) => {
+export const List = ({ toggleViewMode, setSelectedId }) => {
   const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
 
   const handleAddItem = () => {
@@ -17,8 +17,6 @@ export const List = ({ viewMode, toggleViewMode, setSelectedId }) => {
   };
 
   const handleViewItem = (i) => {
-    if (viewMode === "edit") return;
-
     setSelectedId(i);
     toggleViewMode();
   };
@@ -38,7 +36,6 @@ export const List = ({ viewMode, toggleViewMode, setSelectedId }) => {
 };
 
 List.propTypes = {
-  viewMode: PropTypes.string.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
   setSelectedId: PropTypes.func.isRequired,
 };

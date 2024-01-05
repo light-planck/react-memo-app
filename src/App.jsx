@@ -15,7 +15,6 @@ function App() {
       <h1>{viewHeader}</h1>
       <div className="app">
         <List
-          viewMode={viewMode}
           toggleViewMode={toggleViewMode}
           setSelectedId={setSelectedId}
         />
