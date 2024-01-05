@@ -16,6 +16,12 @@
   border: 1px solid #ccc;
 }
 
+.list-item {
+  color: blue;
+  text-decoration: underline;
+  padding: 5px 0;
+}
+
 .edit {
   width: 60%;
   border: 1px solid #ccc;
