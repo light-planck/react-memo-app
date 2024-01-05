@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export const List = ({ setSelectedId, toggleViewMode }) => {
+export const List = ({ viewMode, toggleViewMode, setSelectedId }) => {
   const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
 
   const handleAddItem = () => {
@@ -16,24 +16,27 @@ export const List = ({ setSelectedId, toggleViewMode }) => {
     toggleViewMode();
   };
 
-  const handleViewItem = useCallback((i) => {
+  const handleViewItem = (i) => {
+    if (viewMode === "edit") return;
+
     setSelectedId(i);
     toggleViewMode();
-  }, []);
+  };
 
   return (
     <div className="list">
       {storedValue.map((item, i) => (
-        <div key={i} onClick={() => handleViewItem(i)}>
+        <div className="list-item" key={i} onClick={() => handleViewItem(i)}>
           {item.title}
         </div>
       ))}
-      <button onClick={handleAddItem}>+</button>
+      <button onClick={() => handleAddItem()}>+</button>
     </div>
   );
 };
 
 List.propTypes = {
-  setSelectedId: PropTypes.func.isRequired,
+  viewMode: PropTypes.string.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
+  setSelectedId: PropTypes.func.isRequired,
 };

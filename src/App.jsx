@@ -14,7 +14,11 @@ function App() {
     <div className="container">
       <h1>{viewHeader}</h1>
       <div className="app">
-        <List setSelectedId={setSelectedId} toggleViewMode={toggleViewMode} />
+        <List
+          viewMode={viewMode}
+          toggleViewMode={toggleViewMode}
+          setSelectedId={setSelectedId}
+        />
         {viewMode === "edit" && (
           <Edit
             selectedId={selectedId}
