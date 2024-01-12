@@ -8,7 +8,7 @@ import { Edit } from "./components/Edit";
 import { useViewMode } from "./hooks/useViewMode";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
-function App() {
+const App = () => {
   const { viewMode, toggleViewMode } = useViewMode();
   const [selectedId, setSelectedId] = useState("");
   const { storedValue: memos, setLocalStorageValue: setMemos } =
@@ -63,6 +63,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
