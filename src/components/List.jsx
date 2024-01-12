@@ -10,13 +10,14 @@ export const List = ({
   setSelectedId,
 }) => {
   const handleAddItem = () => {
-    const newMemo = "新規メモ";
-    const newStoredValue = [
-      ...items,
-      { id: uuidv4(), title: newMemo, content: newMemo },
-    ];
+    const newMemo = {
+      id: uuidv4(),
+      title: "新規メモ",
+      content: "新規メモ",
+    };
+    const newStoredValue = [...items, newMemo];
     setLocalStorageValue(newStoredValue);
-    setSelectedId(newStoredValue.length - 1);
+    setSelectedId(newMemo.id);
     if (viewMode === "list") toggleViewMode();
   };
 
