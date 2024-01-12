@@ -8,13 +8,14 @@ import { useViewMode } from "./hooks/useViewMode";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const { viewMode, viewHeader, toggleViewMode } = useViewMode();
+  const { viewMode, toggleViewMode } = useViewMode();
+  const title = viewMode === "list" ? "一覧" : "編集";
   const [selectedId, setSelectedId] = useState(null);
   const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
 
   return (
     <div className="container">
-      <h1>{viewHeader}</h1>
+      <h1>{title}</h1>
       <div className="app">
         <List
           items={storedValue}
