@@ -1,35 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-export const Edit = ({
-  memos,
-  selectedId,
-  setMemos,
-  setSelectedId,
-  toggleViewMode,
-}) => {
-  const [text, setText] = useState(
-    memos.find((item) => item.id === selectedId).content
-  );
+export const Edit = ({ memo, editMemo, deleteMemo, toggleViewMode }) => {
+  const [text, setText] = useState(memo.content);
+
   useEffect(() => {
-    const newText = memos.find((item) => item.id === selectedId).content;
-    setText(newText);
-  }, [selectedId]);
+    setText(memo.content);
+  }, [memo]);
 
   const handleEdit = () => {
-    const newItems = memos.map((item) =>
-      item.id === selectedId
-        ? { id: selectedId, title: text.split("\n")[0], content: text }
-        : item
-    );
-    setMemos(newItems);
+    editMemo(memo.id, text);
     toggleViewMode();
   };
 
   const handleDelete = () => {
-    const newItems = [...memos].filter((item) => item.id !== selectedId);
-    setMemos(newItems);
-    setSelectedId(null);
+    deleteMemo(memo.id);
     toggleViewMode();
   };
 
@@ -41,10 +26,10 @@ export const Edit = ({
         onChange={(e) => setText(e.target.value)}
       />
       <div className="button-container">
-        <button className="button-large" onClick={() => handleEdit()}>
+        <button className="button-large" onClick={handleEdit}>
           編集
         </button>
-        <button className="button-small" onClick={() => handleDelete()}>
+        <button className="button-small" onClick={handleDelete}>
           削除
         </button>
       </div>
@@ -53,15 +38,12 @@ export const Edit = ({
 };
 
 Edit.propTypes = {
-  memos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  selectedId: PropTypes.string,
-  setMemos: PropTypes.func.isRequired,
-  setSelectedId: PropTypes.func.isRequired,
+  memo: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  }).isRequired,
+  editMemo: PropTypes.func.isRequired,
+  deleteMemo: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
 };

@@ -9,10 +9,22 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
   const { viewMode, toggleViewMode } = useViewMode();
-  const title = viewMode === "list" ? "一覧" : "編集";
   const [selectedId, setSelectedId] = useState("");
   const { storedValue: memos, setLocalStorageValue: setMemos } =
     useLocalStorage("memos", []);
+
+  const title = viewMode === "list" ? "一覧" : "編集";
+  const selectedMemo = memos.find((memo) => memo.id === selectedId);
+
+  const editMemo = (id, text) => {
+    setMemos(
+      memos.map((memo) => (memo.id === id ? { ...memo, content: text } : memo))
+    );
+  };
+
+  const deleteMemo = (id) => {
+    setMemos(memos.filter((memo) => memo.id !== id));
+  };
 
   return (
     <div className="container">
@@ -27,10 +39,9 @@ function App() {
         />
         {viewMode === "edit" && (
           <Edit
-            memos={memos}
-            selectedId={selectedId}
-            setMemos={setMemos}
-            setSelectedId={setSelectedId}
+            memo={selectedMemo}
+            editMemo={editMemo}
+            deleteMemo={deleteMemo}
             toggleViewMode={toggleViewMode}
           />
         )}
