@@ -8,24 +8,26 @@ export const Edit = ({
   setSelectedId,
   toggleViewMode,
 }) => {
-  const [text, setText] = useState(items[selectedId].content);
+  const [text, setText] = useState(
+    items.find((item) => item.id === selectedId).content
+  );
   useEffect(() => {
-    setText(items[selectedId].content);
+    const newText = items.find((item) => item.id === selectedId).content;
+    setText(newText);
   }, [selectedId]);
 
   const handleEdit = () => {
-    const newItems = [...items];
-    newItems[selectedId] = {
-      title: text.split("\n")[0],
-      content: text,
-    };
+    const newItems = items.map((item) =>
+      item.id === selectedId
+        ? { id: selectedId, title: text.split("\n")[0], content: text }
+        : item
+    );
     setLocalStorageValue(newItems);
     toggleViewMode();
   };
 
   const handleDelete = () => {
-    const newItems = [...items];
-    newItems.splice(selectedId, 1);
+    const newItems = [...items].filter((item) => item.id !== selectedId);
     setLocalStorageValue(newItems);
     setSelectedId(null);
     toggleViewMode();
@@ -53,11 +55,12 @@ export const Edit = ({
 Edit.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
-  selectedId: PropTypes.number,
+  selectedId: PropTypes.string,
   setLocalStorageValue: PropTypes.func.isRequired,
   setSelectedId: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,

@@ -10,7 +10,7 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 function App() {
   const { viewMode, toggleViewMode } = useViewMode();
   const title = viewMode === "list" ? "一覧" : "編集";
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState("");
   const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
 
   return (
