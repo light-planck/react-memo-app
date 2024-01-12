@@ -12,10 +12,8 @@ export const useLocalStorage = (key, initialValue) => {
 
   const setLocalStorageValue = (value) => {
     try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      window.localStorage.setItem(key, JSON.stringify(value));
+      setStoredValue(value);
     } catch (error) {
       throw new Error(`Could not set localStorage item: ${error}`);
     }
