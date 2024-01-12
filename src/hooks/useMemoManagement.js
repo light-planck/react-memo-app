@@ -31,8 +31,8 @@ export const useMemoManagement = () => {
       memos.map((memo) =>
         memo.id === id
           ? { id: id, title: text.split("\n")[0], content: text }
-          : memo
-      )
+          : memo,
+      ),
     );
   };
 

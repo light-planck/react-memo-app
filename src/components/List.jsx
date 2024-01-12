@@ -34,7 +34,7 @@ List.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
   addMemo: PropTypes.func.isRequired,
   toggleMemo: PropTypes.func.isRequired,
