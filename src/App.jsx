@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import "./App.css";
 
@@ -16,10 +17,30 @@ function App() {
   const title = viewMode === "list" ? "一覧" : "編集";
   const selectedMemo = memos.find((memo) => memo.id === selectedId);
 
+  const addMemo = () => {
+    const newMemo = {
+      id: uuidv4(),
+      title: "新規メモ",
+      content: "新規メモ",
+    };
+    setMemos([...memos, newMemo]);
+
+    toggleMemo(newMemo.id);
+  };
+
   const editMemo = (id, text) => {
     setMemos(
-      memos.map((memo) => (memo.id === id ? { ...memo, content: text } : memo))
+      memos.map((memo) =>
+        memo.id === id
+          ? { id: id, title: text.split("\n")[0], content: text }
+          : memo
+      )
     );
+  };
+
+  const toggleMemo = (id) => {
+    setSelectedId(id);
+    if (viewMode === "list") toggleViewMode();
   };
 
   const deleteMemo = (id) => {
@@ -30,13 +51,7 @@ function App() {
     <div className="container">
       <h1>{title}</h1>
       <div className="app">
-        <List
-          memos={memos}
-          viewMode={viewMode}
-          setMemos={setMemos}
-          toggleViewMode={toggleViewMode}
-          setSelectedId={setSelectedId}
-        />
+        <List memos={memos} addMemo={addMemo} toggleMemo={toggleMemo} />
         {viewMode === "edit" && (
           <Edit
             memo={selectedMemo}

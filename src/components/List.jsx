@@ -1,29 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { v4 as uuidv4 } from "uuid";
 
-export const List = ({
-  memos,
-  viewMode,
-  setMemos,
-  toggleViewMode,
-  setSelectedId,
-}) => {
+export const List = ({ memos, addMemo, toggleMemo }) => {
   const handleAddItem = () => {
-    const newMemo = {
-      id: uuidv4(),
-      title: "新規メモ",
-      content: "新規メモ",
-    };
-    const newStoredValue = [...memos, newMemo];
-    setMemos(newStoredValue);
-    setSelectedId(newMemo.id);
-    if (viewMode === "list") toggleViewMode();
+    addMemo();
   };
 
   const handleViewItem = (id) => {
-    setSelectedId(id);
-    if (viewMode === "list") toggleViewMode();
+    toggleMemo(id);
   };
 
   return (
@@ -37,7 +21,7 @@ export const List = ({
           {item.title}
         </div>
       ))}
-      <button className="button-add" onClick={() => handleAddItem()}>
+      <button className="button-add" onClick={handleAddItem}>
         +
       </button>
     </div>
@@ -52,8 +36,6 @@ List.propTypes = {
       content: PropTypes.string.isRequired,
     })
   ).isRequired,
-  viewMode: PropTypes.string.isRequired,
-  setMemos: PropTypes.func.isRequired,
-  toggleViewMode: PropTypes.func.isRequired,
-  setSelectedId: PropTypes.func.isRequired,
+  addMemo: PropTypes.func.isRequired,
+  toggleMemo: PropTypes.func.isRequired,
 };
