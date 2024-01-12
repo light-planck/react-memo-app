@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
 export const List = ({
-  items,
+  memos,
   viewMode,
-  setLocalStorageValue,
+  setMemos,
   toggleViewMode,
   setSelectedId,
 }) => {
@@ -15,8 +15,8 @@ export const List = ({
       title: "新規メモ",
       content: "新規メモ",
     };
-    const newStoredValue = [...items, newMemo];
-    setLocalStorageValue(newStoredValue);
+    const newStoredValue = [...memos, newMemo];
+    setMemos(newStoredValue);
     setSelectedId(newMemo.id);
     if (viewMode === "list") toggleViewMode();
   };
@@ -28,7 +28,7 @@ export const List = ({
 
   return (
     <div className="list">
-      {items.map((item) => (
+      {memos.map((item) => (
         <div
           className="list-item"
           key={item.id}
@@ -45,7 +45,7 @@ export const List = ({
 };
 
 List.propTypes = {
-  items: PropTypes.arrayOf(
+  memos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
@@ -53,7 +53,7 @@ List.propTypes = {
     })
   ).isRequired,
   viewMode: PropTypes.string.isRequired,
-  setLocalStorageValue: PropTypes.func.isRequired,
+  setMemos: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
   setSelectedId: PropTypes.func.isRequired,
 };

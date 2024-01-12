@@ -2,33 +2,33 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export const Edit = ({
-  items,
+  memos,
   selectedId,
-  setLocalStorageValue,
+  setMemos,
   setSelectedId,
   toggleViewMode,
 }) => {
   const [text, setText] = useState(
-    items.find((item) => item.id === selectedId).content
+    memos.find((item) => item.id === selectedId).content
   );
   useEffect(() => {
-    const newText = items.find((item) => item.id === selectedId).content;
+    const newText = memos.find((item) => item.id === selectedId).content;
     setText(newText);
   }, [selectedId]);
 
   const handleEdit = () => {
-    const newItems = items.map((item) =>
+    const newItems = memos.map((item) =>
       item.id === selectedId
         ? { id: selectedId, title: text.split("\n")[0], content: text }
         : item
     );
-    setLocalStorageValue(newItems);
+    setMemos(newItems);
     toggleViewMode();
   };
 
   const handleDelete = () => {
-    const newItems = [...items].filter((item) => item.id !== selectedId);
-    setLocalStorageValue(newItems);
+    const newItems = [...memos].filter((item) => item.id !== selectedId);
+    setMemos(newItems);
     setSelectedId(null);
     toggleViewMode();
   };
@@ -53,7 +53,7 @@ export const Edit = ({
 };
 
 Edit.propTypes = {
-  items: PropTypes.arrayOf(
+  memos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
@@ -61,7 +61,7 @@ Edit.propTypes = {
     })
   ).isRequired,
   selectedId: PropTypes.string,
-  setLocalStorageValue: PropTypes.func.isRequired,
+  setMemos: PropTypes.func.isRequired,
   setSelectedId: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
 };

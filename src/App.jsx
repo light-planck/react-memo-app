@@ -11,24 +11,25 @@ function App() {
   const { viewMode, toggleViewMode } = useViewMode();
   const title = viewMode === "list" ? "一覧" : "編集";
   const [selectedId, setSelectedId] = useState("");
-  const { storedValue, setLocalStorageValue } = useLocalStorage("memos", []);
+  const { storedValue: memos, setLocalStorageValue: setMemos } =
+    useLocalStorage("memos", []);
 
   return (
     <div className="container">
       <h1>{title}</h1>
       <div className="app">
         <List
-          items={storedValue}
+          memos={memos}
           viewMode={viewMode}
-          setLocalStorageValue={setLocalStorageValue}
+          setMemos={setMemos}
           toggleViewMode={toggleViewMode}
           setSelectedId={setSelectedId}
         />
         {viewMode === "edit" && (
           <Edit
-            items={storedValue}
+            memos={memos}
             selectedId={selectedId}
-            setLocalStorageValue={setLocalStorageValue}
+            setMemos={setMemos}
             setSelectedId={setSelectedId}
             toggleViewMode={toggleViewMode}
           />
