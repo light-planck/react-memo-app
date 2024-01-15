@@ -24,12 +24,12 @@ const App = () => {
     <div className="container">
       <h1>{title}</h1>
       <div className="app">
-        <List memos={memos} addMemo={addMemo} toggleMemo={toggleMemo} />
+        <List memos={memos} onAdd={addMemo} toggleMemo={toggleMemo} />
         {viewMode === "edit" && (
           <Edit
             memo={selectedMemo}
-            editMemo={editMemo}
-            deleteMemo={deleteMemo}
+            onEdit={editMemo}
+            onDelete={deleteMemo}
             toggleViewMode={toggleViewMode}
           />
         )}

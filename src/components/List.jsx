@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const List = ({ memos, addMemo, toggleMemo }) => {
+export const List = ({ memos, onAdd, toggleMemo }) => {
   const handleAddItem = () => {
-    const id = addMemo();
+    const id = onAdd();
     toggleMemo(id);
   };
 
@@ -37,6 +37,6 @@ List.propTypes = {
       content: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  addMemo: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
   toggleMemo: PropTypes.func.isRequired,
 };

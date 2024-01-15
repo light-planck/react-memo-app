@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-export const Edit = ({ memo, editMemo, deleteMemo, toggleViewMode }) => {
+export const Edit = ({ memo, onEdit, onDelete, toggleViewMode }) => {
   const [text, setText] = useState(memo.content);
 
   useEffect(() => {
@@ -9,12 +9,12 @@ export const Edit = ({ memo, editMemo, deleteMemo, toggleViewMode }) => {
   }, [memo]);
 
   const handleEdit = () => {
-    editMemo(memo.id, text);
+    onEdit(memo.id, text);
     toggleViewMode();
   };
 
   const handleDelete = () => {
-    deleteMemo(memo.id);
+    onDelete(memo.id);
     toggleViewMode();
   };
 
@@ -43,7 +43,7 @@ Edit.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
   }).isRequired,
-  editMemo: PropTypes.func.isRequired,
-  deleteMemo: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   toggleViewMode: PropTypes.func.isRequired,
 };
