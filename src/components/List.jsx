@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 export const List = ({ memos, addMemo, toggleMemo }) => {
   const handleAddItem = () => {
-    addMemo();
+    const id = addMemo();
+    toggleMemo(id);
   };
 
   const handleViewItem = (id) => {

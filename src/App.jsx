@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./App.css";
 
 import { List } from "./components/List";
 import { Edit } from "./components/Edit";
-import { useMemo } from "./hooks/useMemo";
+import { useMemos } from "./hooks/useMemos";
+import { useViewMode } from "./hooks/useViewMode";
 
 const App = () => {
-  const {
-    memos,
-    selectedId,
-    viewMode,
-    toggleMemo,
-    addMemo,
-    editMemo,
-    deleteMemo,
-    toggleViewMode,
-  } = useMemo();
+  const { memos, addMemo, editMemo, deleteMemo } = useMemos();
+
+  const { viewMode, toggleViewMode } = useViewMode();
+  const [selectedId, setSelectedId] = useState("");
+  const toggleMemo = (id) => {
+    setSelectedId(id);
+    if (viewMode === "list") toggleViewMode();
+  };
 
   const title = viewMode === "list" ? "一覧" : "編集";
   const selectedMemo = memos.find((memo) => memo.id === selectedId);
