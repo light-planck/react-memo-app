@@ -4,7 +4,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import { useState } from "react";
 import { useViewMode } from "./useViewMode";
 
-export const useMemoManagement = () => {
+export const useMemo = () => {
   const { storedValue: memos, setLocalStorageValue: setMemos } =
     useLocalStorage("memos", []);
   const [selectedId, setSelectedId] = useState("");

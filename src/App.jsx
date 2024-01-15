@@ -4,7 +4,7 @@ import "./App.css";
 
 import { List } from "./components/List";
 import { Edit } from "./components/Edit";
-import { useMemoManagement } from "./hooks/useMemoManagement";
+import { useMemo } from "./hooks/useMemo";
 
 const App = () => {
   const {
@@ -16,7 +16,7 @@ const App = () => {
     editMemo,
     deleteMemo,
     toggleViewMode,
-  } = useMemoManagement();
+  } = useMemo();
 
   const title = viewMode === "list" ? "一覧" : "編集";
   const selectedMemo = memos.find((memo) => memo.id === selectedId);
