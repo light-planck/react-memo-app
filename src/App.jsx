@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <>
-      <h1>{title}</h1>
+      <h1 className="title">{title}</h1>
       <div className="container">
         <AuthButton />
         <div className="app">
