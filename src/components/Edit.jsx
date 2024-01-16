@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useUser } from "../hooks/useUser";
 
 export const Edit = ({ memo, onEdit, onDelete, toggleViewMode }) => {
-  const [text, setText] = useState(memo.content);
+  const { isLoggedIn } = useUser();
 
+  const [text, setText] = useState(memo.content);
   useEffect(() => {
     setText(memo.content);
   }, [memo]);
@@ -25,14 +27,16 @@ export const Edit = ({ memo, onEdit, onDelete, toggleViewMode }) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <div className="button-container">
-        <button className="button-large" onClick={handleEdit}>
-          編集
-        </button>
-        <button className="button-small" onClick={handleDelete}>
-          削除
-        </button>
-      </div>
+      {isLoggedIn && (
+        <div className="button-container">
+          <button className="button-large" onClick={handleEdit}>
+            編集
+          </button>
+          <button className="button-small" onClick={handleDelete}>
+            削除
+          </button>
+        </div>
+      )}
     </div>
   );
 };
