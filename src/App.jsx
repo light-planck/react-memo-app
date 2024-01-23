@@ -25,19 +25,21 @@ const App = () => {
 
   return (
     <>
-      <h1 className="title">{title}</h1>
       <div className="container">
-        <AuthButton />
+        <h1 className="title">{title}</h1>
         <div className="app">
-          <List memos={memos} onAdd={addMemo} toggleMemo={toggleMemo} />
-          {viewMode === "edit" && (
-            <Edit
-              memo={selectedMemo}
-              onEdit={editMemo}
-              onDelete={deleteMemo}
-              toggleViewMode={toggleViewMode}
-            />
-          )}
+          <AuthButton />
+          <div className="memo">
+            <List memos={memos} onAdd={addMemo} toggleMemo={toggleMemo} />
+            {viewMode === "edit" && (
+              <Edit
+                memo={selectedMemo}
+                onEdit={editMemo}
+                onDelete={deleteMemo}
+                toggleViewMode={toggleViewMode}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

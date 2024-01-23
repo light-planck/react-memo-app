@@ -1,7 +1,6 @@
 .container {
   margin: 0 auto 0 auto;
   width: 1000px;
-  border: 1px solid #ccc;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -9,6 +8,11 @@
 }
 
 .app {
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+.memo {
   display: flex;
   flex-direction: row;
   gap: 1rem;
