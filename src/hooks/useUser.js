@@ -6,6 +6,6 @@ export const useUser = () => {
   if (userContext === null)
     throw new Error("useUser must be used wrapped a UserProvider.");
 
-  const { isLoggedIn, login, logout } = userContext;
-  return { isLoggedIn, login, logout };
+  const { isLoggedIn, setUserId } = userContext;
+  return { isLoggedIn, setUserId };
 };
