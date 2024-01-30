@@ -1,4 +1,5 @@
-import React, { useUser } from "../hooks/useUser";
+import React from "react";
+import { useUser } from "./UserProvider";
 
 export const AuthButton = () => {
   const { isLoggedIn, setUserId } = useUser();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useUser } from "../hooks/useUser";
+import { useUser } from "./UserProvider";
 
 export const Edit = ({ memo, onEdit, onDelete, toggleViewMode }) => {
   const { isLoggedIn } = useUser();
