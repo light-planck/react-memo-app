@@ -1,24 +1,16 @@
 import React, { useUser } from "../hooks/useUser";
 
 export const AuthButton = () => {
-  const { isLoggedIn, setUserId } = useUser();
-
-  const handleLogout = () => {
-    setUserId(null);
-  };
-
-  const handleLogin = () => {
-    setUserId("user1");
-  };
+  const { isLoggedIn, login, logout } = useUser();
 
   return (
     <div className="auth-button-container">
       {isLoggedIn ? (
-        <button className="auth-button" onClick={handleLogout}>
+        <button className="auth-button" onClick={logout}>
           ログアウト
         </button>
       ) : (
-        <button className="auth-button" onClick={handleLogin}>
+        <button className="auth-button" onClick={login}>
           ログイン
         </button>
       )}
