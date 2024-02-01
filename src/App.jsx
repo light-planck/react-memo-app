@@ -7,7 +7,7 @@ import { Edit } from "./components/Edit";
 import { List } from "./components/List";
 import { useMemos } from "./hooks/useMemos";
 import { useViewMode } from "./hooks/useViewMode";
-import { useUser } from "./components/UserProvider";
+import { useUser } from "./hooks/useUser";
 
 const App = () => {
   const { memos, addMemo, editMemo, deleteMemo } = useMemos();

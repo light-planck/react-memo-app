@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useUser } from "./UserProvider";
+import { useUser } from "../hooks/useUser";
 
 export const List = ({ memos, onAdd, toggleMemo }) => {
   const { isLoggedIn } = useUser();
