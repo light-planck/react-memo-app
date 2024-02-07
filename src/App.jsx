@@ -2,13 +2,16 @@ import React, { useState } from "react";
 
 import "./App.css";
 
-import { List } from "./components/List";
+import { AuthButton } from "./components/AuthButton";
 import { Edit } from "./components/Edit";
+import { List } from "./components/List";
 import { useMemos } from "./hooks/useMemos";
 import { useViewMode } from "./hooks/useViewMode";
+import { useUser } from "./hooks/useUser";
 
 const App = () => {
   const { memos, addMemo, editMemo, deleteMemo } = useMemos();
+  const { isLoggedIn } = useUser();
 
   const { viewMode, toggleViewMode } = useViewMode();
   const [selectedId, setSelectedId] = useState("");
@@ -17,24 +20,29 @@ const App = () => {
     if (viewMode === "list") toggleViewMode();
   };
 
-  const title = viewMode === "list" ? "一覧" : "編集";
+  const title = isLoggedIn ? "ログイン済" : "未ログイン";
   const selectedMemo = memos.find((memo) => memo.id === selectedId);
 
   return (
-    <div className="container">
-      <h1>{title}</h1>
-      <div className="app">
-        <List memos={memos} onAdd={addMemo} toggleMemo={toggleMemo} />
-        {viewMode === "edit" && (
-          <Edit
-            memo={selectedMemo}
-            onEdit={editMemo}
-            onDelete={deleteMemo}
-            toggleViewMode={toggleViewMode}
-          />
-        )}
+    <>
+      <div className="container">
+        <h1 className="title">{title}</h1>
+        <div className="app">
+          <AuthButton />
+          <div className="memo">
+            <List memos={memos} onAdd={addMemo} toggleMemo={toggleMemo} />
+            {viewMode === "edit" && (
+              <Edit
+                memo={selectedMemo}
+                onEdit={editMemo}
+                onDelete={deleteMemo}
+                toggleViewMode={toggleViewMode}
+              />
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

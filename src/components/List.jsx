@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useUser } from "../hooks/useUser";
 
 export const List = ({ memos, onAdd, toggleMemo }) => {
+  const { isLoggedIn } = useUser();
+
   const handleAddItem = () => {
     const id = onAdd();
     toggleMemo(id);
@@ -22,9 +25,11 @@ export const List = ({ memos, onAdd, toggleMemo }) => {
           {item.title}
         </div>
       ))}
-      <button className="button-add" onClick={handleAddItem}>
-        +
-      </button>
+      {isLoggedIn && (
+        <button className="button-add" onClick={handleAddItem}>
+          +
+        </button>
+      )}
     </div>
   );
 };
